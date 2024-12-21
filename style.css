@@ -1,0 +1,86 @@
+/* General Styles */
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f4f4f4; /* Subtle gray background */
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.auth-container {
+  width: 400px;
+  padding: 30px;
+  background: #ffffff; /* Clean white container */
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.5s ease;
+}
+
+.auth-container:hover {
+  transform: scale(1.02);
+}
+
+.auth-form input {
+  width: 90%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.3s ease-in-out;
+}
+
+.auth-form input:focus {
+  outline: none;
+  border-color: #5e9ca0; /* Subtle accent */
+}
+
+.auth-form button {
+  width: 95%;
+  padding: 14px;
+  background: #5e9ca0; /* Classy green accent */
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s ease-in-out;
+}
+
+.auth-form button:hover {
+  background: #497f82;
+  transform: scale(1.03);
+}
+
+.switch-form {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #666;
+}
+
+.switch-form a {
+  color: #5e9ca0;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.switch-form a:hover {
+  text-decoration: underline;
+}
+
+.hidden {
+  display: none;
+}
+
+h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #444;
+}

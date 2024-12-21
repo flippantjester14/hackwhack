@@ -1,0 +1,152 @@
+/* Root Variables */
+:root {
+  --bg-light: #f8f9fa;
+  --bg-dark: #000000;
+  --card-bg-light: #ffffff;
+  --card-bg-dark: #1a1a1a;
+  --text-light: #212529;
+  --text-dark: #e0e0e0;
+  --primary-color: #5e9ca0;
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-light);
+  transition: all 0.3s ease;
+}
+
+body.dark-mode {
+  background-color: var(--bg-dark);
+  color: var(--text-dark);
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: var(--card-bg-light);
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+body.dark-mode .navbar {
+  background-color: var(--card-bg-dark);
+  box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+}
+
+.navbar-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.nav-actions button,
+.nav-actions select {
+  padding: 10px 15px;
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nav-actions button:hover {
+  background-color: #4e8d88;
+}
+
+/* Live Data Section */
+.live-data-section {
+  margin-bottom: 30px;
+}
+
+.live-data {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+}
+
+.data-card {
+  background-color: var(--card-bg-light);
+  border-radius: 10px;
+  text-align: center;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+body.dark-mode .data-card {
+  background-color: var(--card-bg-dark);
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+}
+
+.data-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Evaluation Button */
+.evaluation-section {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.evaluation-section button {
+  padding: 12px 25px;
+  font-size: 16px;
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.evaluation-section button:hover {
+  background-color: #4e8d88;
+  transform: scale(1.1);
+}
+
+/* Graphs Section */
+.graphs-section h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.graphs-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+canvas {
+  background-color: var(--card-bg-light);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  transition: all 0.3s ease;
+}
+
+body.dark-mode canvas {
+  background-color: var(--card-bg-dark);
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .live-data,
+  .graphs-container {
+    grid-template-columns: 1fr;
+  }
+}

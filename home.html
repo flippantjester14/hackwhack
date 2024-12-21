@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medical Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- Navbar -->
+    <nav class="navbar">
+      <h1 class="navbar-title">Medical Dashboard</h1>
+      <div class="nav-actions">
+        <select id="languageSelector">
+          <option value="en">English</option>
+          <option value="es">Spanish</option>
+          <option value="fr">French</option>
+          <option value="de">German</option>
+        </select>
+        <button id="themeSwitcher">Switch to Light Mode</button>
+        <button id="logoutBtn" class="logout">Logout</button>
+      </div>
+    </nav>
+
+    <!-- Live Data Section -->
+    <section class="live-data-section">
+      <h2>Live Health Stats</h2>
+      <div class="live-data">
+        <div class="data-card">
+          <h3>SPO2</h3>
+          <p id="spo2-value">--</p>
+        </div>
+        <div class="data-card">
+          <h3>Heart Rate</h3>
+          <p id="heart-rate-value">--</p>
+        </div>
+        <div class="data-card">
+          <h3>Temperature</h3>
+          <p id="temperature-value">--</p>
+        </div>
+        <div class="data-card">
+          <h3>Stress Level</h3>
+          <p id="stress-level-value">--</p>
+        </div>
+        <div class="data-card">
+          <h3>Blood Pressure</h3>
+          <p id="blood-pressure-value">--</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Evaluation Button -->
+    <section class="evaluation-section">
+      <button id="evaluationBtn">Conduct Evaluation</button>
+    </section>
+
+    <!-- Graphs Section -->
+    <section class="graphs-section hidden" id="graphsContainer">
+      <h2>Health Data Trends</h2>
+      <div class="graphs-container">
+        <canvas id="spo2Chart"></canvas>
+        <canvas id="heartRateChart"></canvas>
+        <canvas id="temperatureChart"></canvas>
+        <canvas id="stressLevelChart"></canvas>
+        <canvas id="bloodPressureChart"></canvas>
+      </div>
+    </section>
+  </div>
+
+  <script src="home.js"></script>
+</body>
+</html>
