@@ -170,8 +170,8 @@ def download_report():
 @app.route('/send_whatsapp', methods=['POST'])
 def send_whatsapp():
     try:
-        account_sid = "ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-        auth_token = "your_auth_token"
+        account_sid = 'AC391bfc5c5b70a6ac3255b7f924e2f080'
+        auth_token = 'a9ace9ee9b5afd8ed0b74b674a3e9ccc'
         client = Client(account_sid, auth_token)
 
         if 'pdf_path' not in conversation_state:
