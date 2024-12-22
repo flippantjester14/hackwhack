@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   LineChart,
   Line,
@@ -7,7 +7,7 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-} from 'recharts';
+} from "recharts";
 import {
   Activity,
   Heart,
@@ -16,19 +16,24 @@ import {
   Moon,
   MessageCircle,
   LogOut,
-} from 'lucide-react';
+  Sun,
+} from "lucide-react";
+import Chatbot from "./Chatbot"; // Import the Chatbot component
 
 const Dashboard = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [showGraphs, setShowGraphs] = useState(false);
+  const [showChatbot, setShowChatbot] = useState(false); // For toggling Chatbot
   const [healthData, setHealthData] = useState({
-    spo2: '--',
-    heartRate: '--',
-    temperature: '--',
-    stressLevel: '--',
-    bloodPressure: '--',
+    spo2: "--",
+    heartRate: "--",
+    temperature: "--",
+    stressLevel: "--",
+    bloodPressure: "--",
   });
+  const [weather, setWeather] = useState(null);
 
+  // Function to generate random time series data for charts
   const generateTimeSeriesData = (min, max, count = 24) => {
     return Array.from({ length: count }, (_, i) => ({
       time: `${i}:00`,
@@ -44,6 +49,7 @@ const Dashboard = () => {
     bloodPressure: [],
   });
 
+  // Update health data and charts every 3 seconds
   useEffect(() => {
     if (showGraphs) {
       const interval = setInterval(() => {
@@ -68,13 +74,30 @@ const Dashboard = () => {
     }
   }, [showGraphs]);
 
-  const handleLogout = () => {
-    // Clear any stored user data or tokens
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
+  // Fetch weather data for Bangalore
+  useEffect(() => {
+    const fetchWeather = async () => {
+      try {
+        const response = await fetch(
+          `http://api.weatherstack.com/current?access_key=b284cee0454bd1cfb755deff740f4d25&query=Bangalore`
+        );
+        const data = await response.json();
+        setWeather(data);
+      } catch (error) {
+        console.error("Error fetching weather data:", error);
+      }
+    };
 
-    // Redirect to the login page
-    window.location.href = '/login';
+    fetchWeather();
+
+    const interval = setInterval(fetchWeather, 60000); // Update every 60 seconds
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    window.location.href = "/login";
   };
 
   const StatCard = ({ title, value, icon: Icon, color }) => (
@@ -115,7 +138,7 @@ const Dashboard = () => {
   return (
     <div
       className={`min-h-screen w-screen transition-colors duration-300 ${
-        darkMode ? 'dark bg-gray-900 text-white' : 'bg-gray-50 text-black'
+        darkMode ? "dark bg-gray-900 text-white" : "bg-gray-50 text-black"
       }`}
     >
       <div className="flex flex-col h-full w-full px-4 sm:px-6 lg:px-8 py-6">
@@ -146,35 +169,70 @@ const Dashboard = () => {
           </div>
         </nav>
 
+        {/* Weather Widget */}
+        <div className="flex justify-end mb-4">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 w-64">
+            <h3 className="text-lg font-medium mb-2 flex items-center gap-2">
+              <Sun className="w-5 h-5 text-yellow-500" /> Weather in Bangalore
+            </h3>
+            {weather && weather.current ? (
+              <div>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  Temperature:{" "}
+                  <span className="font-bold text-gray-800 dark:text-gray-200">
+                    {weather.current.temperature}°C
+                  </span>
+                </p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  Weather:{" "}
+                  <span className="font-bold text-gray-800 dark:text-gray-200">
+                    {weather.current.weather_descriptions[0]}
+                  </span>
+                </p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  Humidity:{" "}
+                  <span className="font-bold text-gray-800 dark:text-gray-200">
+                    {weather.current.humidity}%
+                  </span>
+                </p>
+              </div>
+            ) : (
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                Loading weather data...
+              </p>
+            )}
+          </div>
+        </div>
+
         {/* Stat Cards */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
           <StatCard
             title="SPO2"
-            value={healthData.spo2}
+            value={healthData?.spo2 || "--"}
             icon={Activity}
             color="text-blue-500"
           />
           <StatCard
             title="Heart Rate"
-            value={healthData.heartRate}
+            value={healthData?.heartRate || "--"}
             icon={Heart}
             color="text-red-500"
           />
           <StatCard
             title="Temperature"
-            value={healthData.temperature}
+            value={healthData?.temperature || "--"}
             icon={Thermometer}
             color="text-yellow-500"
           />
           <StatCard
             title="Stress Level"
-            value={healthData.stressLevel}
+            value={healthData?.stressLevel || "--"}
             icon={Brain}
             color="text-purple-500"
           />
           <StatCard
             title="Blood Pressure"
-            value={healthData.bloodPressure}
+            value={healthData?.bloodPressure || "--"}
             icon={Activity}
             color="text-green-500"
           />
@@ -189,7 +247,7 @@ const Dashboard = () => {
             Conduct Evaluation
           </button>
           <button
-            onClick={() => alert('Chatbot coming soon!')}
+            onClick={() => setShowChatbot(!showChatbot)}
             className="px-6 py-3 rounded-lg border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors flex items-center gap-2"
           >
             <MessageCircle className="h-4 w-4" /> Chat with Bot
@@ -206,6 +264,9 @@ const Dashboard = () => {
             <ChartCard title="Blood Pressure" data={chartData.bloodPressure} color="#22c55e" />
           </div>
         )}
+
+        {/* Chatbot */}
+        {showChatbot && <Chatbot />}
       </div>
     </div>
   );
