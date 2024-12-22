@@ -14,13 +14,16 @@
     <nav class="navbar">
       <h1 class="navbar-title">Medical Dashboard</h1>
       <div class="nav-actions">
+        <label class="theme-toggle">
+          <input type="checkbox" id="themeToggle">
+          <span class="slider"></span>
+        </label>
         <select id="languageSelector">
           <option value="en">English</option>
           <option value="es">Spanish</option>
           <option value="fr">French</option>
           <option value="de">German</option>
         </select>
-        <button id="themeSwitcher">Switch to Light Mode</button>
         <button id="logoutBtn" class="logout">Logout</button>
       </div>
     </nav>
@@ -52,20 +55,36 @@
       </div>
     </section>
 
-    <!-- Evaluation Button -->
-    <section class="evaluation-section">
+    <!-- Evaluation and Chat Section -->
+    <section class="evaluation-chat-section">
       <button id="evaluationBtn">Conduct Evaluation</button>
+      <button id="chatBtn">Chat with Chatbot</button>
     </section>
 
     <!-- Graphs Section -->
     <section class="graphs-section hidden" id="graphsContainer">
       <h2>Health Data Trends</h2>
       <div class="graphs-container">
-        <canvas id="spo2Chart"></canvas>
-        <canvas id="heartRateChart"></canvas>
-        <canvas id="temperatureChart"></canvas>
-        <canvas id="stressLevelChart"></canvas>
-        <canvas id="bloodPressureChart"></canvas>
+        <div class="graph">
+          <h3>SPO2 Levels</h3>
+          <canvas id="spo2Chart"></canvas>
+        </div>
+        <div class="graph">
+          <h3>Heart Rate</h3>
+          <canvas id="heartRateChart"></canvas>
+        </div>
+        <div class="graph">
+          <h3>Body Temperature</h3>
+          <canvas id="temperatureChart"></canvas>
+        </div>
+        <div class="graph">
+          <h3>Stress Level</h3>
+          <canvas id="stressLevelChart"></canvas>
+        </div>
+        <div class="graph">
+          <h3>Blood Pressure</h3>
+          <canvas id="bloodPressureChart"></canvas>
+        </div>
       </div>
     </section>
   </div>
